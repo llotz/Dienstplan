@@ -1,0 +1,231 @@
+body {
+  margin: auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+
+  /* Debug, just for eyestrain purposes */
+  background-color: #2b2b2b;
+  color: white;
+  font-weight: lighter;
+}
+
+textarea {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #2b2b2b;
+  color: white;
+}
+
+select {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #2b2b2b;
+  color: white;
+}
+
+input {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #2b2b2b;
+  color: white;
+}
+
+p {
+  margin: 2px 0px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
+.contentPage {
+  margin: 20 20;
+}
+
+.error {
+  background-color: red;
+  color: white;
+  border: 2px solid white;
+  padding: 10px;
+}
+
+.message {
+  background-color: #008812;
+  color: white;
+  border: 2px solid white;
+  padding: 10px;
+}
+
+.header {
+  margin: 10 0 0 20;
+  font-size: 22pt;
+}
+
+.header a {
+  color: #62d2ff;
+  text-decoration: none;
+}
+
+.header a:visited {
+  color: #62d2ff;
+}
+
+.tall {
+  font-size: 16pt;
+}
+
+.footer {
+  padding: 10px 20px;
+  font-size: 10pt;
+}
+
+.login-info {
+  padding: 10px 20px;
+}
+
+.calendar-week-hint {
+  font-size: 14pt;
+  margin-bottom: -8px;
+  margin-top: 10px;
+  padding: 2px 10px;
+  background-color: #448eac;
+  max-width: 1180px;
+}
+
+.filter-box {
+  display: flex;
+  flex-direction: row;
+  font-size: 14pt;
+}
+
+.flex-box-button {
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 20 0 0 0;
+  padding: 0;
+  overflow: hidden;
+
+  border-top: solid 1px #62d2ff;
+  border-bottom: solid 1px #62d2ff;
+}
+
+.menu ul li {
+  float: left;
+}
+
+.menu ul li a {
+  display: block;
+  text-align: center;
+  color: #62d2ff;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.menu ul li a:hover {
+  background-color: gray;
+  color: #62d2ff;
+}
+
+.login-info {
+  padding: 10px;
+  border-top: solid 1px #62d2ff;
+  border-bottom: solid 1px #62d2ff;
+}
+
+.phpgridder-table {
+  max-width: 1200px;
+  padding: 10px 0px;
+}
+
+.phpgridder-row {
+  display: flex;
+  flex-direction: row;
+  border-left: 7px solid rgba(0, 0, 0, 0);
+  border-right: 7px solid rgba(0, 0, 0, 0);
+  border-bottom: 1px solid white;
+}
+
+.phpgridder-titlerow {
+  display: flex;
+  flex-direction: row;
+  border-left: 7px solid rgba(0, 0, 0, 0);
+  border-right: 7px solid rgba(0, 0, 0, 0);
+  border-bottom: 3px solid white;
+}
+
+.phpgridder-odd-row {
+  background-color: #242424;
+}
+
+.phpgridder-even-row {
+  background-color: #444444;
+}
+
+.event {
+  border-left: 7px solid #62d2ff;
+}
+
+.phpgridder-cell {
+  flex-basis: 100%;
+  padding: 8px 4px;
+}
+
+.phpgridder-titlecell {
+  flex-basis: 100%;
+  font-size: 13pt;
+  padding: 8px 4px;
+}
+
+.input-field {
+  padding: 4px;
+}
+
+.input-description {
+  margin-bottom: 5px;
+}
+
+.input-value {
+  width: 200px;
+}
+
+.input-value select {
+  width: 200px;
+}
+
+@media screen and (max-width: 600px) {
+  .filter-box {
+    flex-flow: column;
+
+    padding: 5px;
+  }
+  .filter {
+    border: 1px solid white;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .phpgridder-row {
+    flex-wrap: wrap;
+  }
+
+  .phpgridder-cell {
+    padding: 2px;
+  }
+
+  .phpgridder-titlecell {
+    padding: 2px;
+  }
+
+  .phpgridder-titlerow {
+    visibility: hidden;
+    border-bottom: 3px solid white;
+  }
+}
