@@ -22,7 +22,7 @@
             AND u.Mail = '{$sessionManager->getMailAdress()}'
             AND p.Permissionlevel >= 50";
             $result = $db->rawQuery($sqlQuery);
-            if(is_array($result) && count($result) > 0 && $result["Id"] == $trainigId)
+            if(is_array($result) && count($result) > 0 && $result[0]["Id"] == $trainingId)
                 return true;
             else 
                 return false;

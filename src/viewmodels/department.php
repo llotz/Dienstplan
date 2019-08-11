@@ -8,8 +8,8 @@
 
 	include_once(getBiz("DepartmentRepo"));
 	$departmentRepo = new DepartmentRepo();
-	$departmentName = $departmentRepo->GetAll("ID = $departmentId")[0]["Name"];
-
+    $departmentName = $departmentRepo->GetAll("ID = $departmentId")[0]["Name"];
+    
     if($userPermissionLevel >= 50)
         $admin = true;
  
@@ -42,8 +42,12 @@
         $trainings[$i]["Beginn"] = $weekday[substr($foo, 0, 1)] . substr($foo, 1);
     }
 
+    $cellDivClasses = array(
+		array("Thema", "topic-cell")
+	);
+
     $phpGridder = new PhpGridder($trainings);
-    $phpGridder->rowDivClassConditions = $rowDivClassConditions;
+    $phpGridder->cellDivClasses = $cellDivClasses;
     $phpGridder->columnsToHide = array("Id", "IsEvent");
     $phpGridder->rowLinks = array("/training/%s", "Id");
     $phpGridder->columnWidths = array("Ort" => 150);

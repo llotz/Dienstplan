@@ -7,6 +7,8 @@ class SessionManager{
     }
 
     public function getMailAdress(){
+        if(!isset($_SESSION['mail']))
+            return "";    
         return $_SESSION['mail'];
     } 
 

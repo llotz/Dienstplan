@@ -12,28 +12,29 @@
     $sectors = $sectorRepo->GetAll();
     $departments = $departmentRepo->GetAll("", "NAME ASC");
 
+    $departmentId = 0;
+    $sectorId = 0;
+
     $intervalList = loadJsonAsArray("intervalList");
 
     $interval = 180;
 
     $where = "";
 
-    if($_GET["department"] != "" && is_numeric($_GET["department"])){
+    if(isset($_GET["department"]) && is_numeric($_GET["department"])){
         $departmentId = $_GET["department"];
         $where .= " AND DepartmentId = $departmentId ";
     }
 
-    if($_GET["sector"] != "" && is_numeric($_GET["sector"])){
+    if(isset($_GET["sector"]) && is_numeric($_GET["sector"])){
         $sectorId = $_GET["sector"];
         $where .= " AND SectorId = $sectorId ";
     }
 
-    if($_GET["interval"] != "" && is_numeric($_GET["interval"])){
+    if(isset($_GET["interval"]) && is_numeric($_GET["interval"])){
         if($_GET["interval"] > 0)
             $interval = $_GET["interval"];
     }
-
-    //print_r($_GET);
     
     $trainings = $trainingRepo->GetTrainings($where, $interval);
 

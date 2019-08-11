@@ -104,7 +104,21 @@
     function requireLogin(){
         global $sessionManager;
         if(!$sessionManager->isLoggedIn())
-            ShowError("Dafür müsst Du eingeloggt sein!", false);
+            ShowError("Dafür musst Du eingeloggt sein!", false);
+    }
+
+    function requireAdminPermission(){
+        requirePermissionLevel(100);
+    }
+
+    function requireLeaderPermission(){
+        requirePermissionLevel(50);
+    }
+
+    function requirePermissionLevel($minRequiredPermissionLevel){
+        global $sessionManager;
+        if(!$sessionManager->isLoggedIn() || getHighestUserPermissionLevel() < $minRequiredPermissionLevel)
+            ShowError("Dafür hast du keine Berechtigung!", false);
     }
 
     function ShowMessage($notificationMessage, $showContent = true){

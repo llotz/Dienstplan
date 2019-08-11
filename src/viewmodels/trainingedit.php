@@ -28,10 +28,14 @@ $sectors = $sectorRepo->GetAll();
 
 
 // variable declarations from get
-$id = $_GET["id"];
+$id = 0;
+if(isset($_GET["id"]))
+    $id = $_GET["id"];
+
+if(isset($_GET["departmentId"]))
 $preSelectedDepartmentId = $_GET["departmentId"];
 
-if($preSelectedDepartmentId == ""){
+if(!isset($preSelectedDepartmentId)){
   $preSelectedDepartmentId = $userRepo->GetCurrentUser()["HomeDepartmentId"];
 }
 

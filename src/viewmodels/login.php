@@ -1,5 +1,5 @@
 <?
-    if($_SESSION['name'] != ""){
+    if(isset($_SESSION['name'])){
         redirect("main");
     }
 

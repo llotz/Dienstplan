@@ -6,7 +6,7 @@
     include_once("includes/sessionManager.php");
     include_once("includes/functions.php");
     include_once("includes/libs/PhpGridder.php");
-    
+
     $sessionManager = new SessionManager();
 ?>
 
@@ -58,10 +58,10 @@
 
     <?
       // Set Title and Description
-      if($title != "") $pageTitle = $title;
+      if(isset($title)) $pageTitle = $title;
       else $pageTitle = $website_title;
       
-      if($description != "") $pageDescription = $description;
+      if(isset($description)) $pageDescription = $description;
       else $pageDescription = $website_description;
 
       $pageContents = ob_get_contents (); // Get all the page's HTML into a string
