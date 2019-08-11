@@ -8,6 +8,3 @@ EXPOSE 80
 RUN a2enmod rewrite
 
 ADD ./src /var/www/html
-
-# Setup Database with create script
-COPY createDb.sql /docker-entrypoint-initdb.d/

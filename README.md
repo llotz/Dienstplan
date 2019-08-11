@@ -1,13 +1,16 @@
 # Dienstplan
 
-## Installation
+## Installation of test environment
 
-- Create the database with the createDb.sql script
-- edit the db settings in src/includes/db.php
-- edit the settings in src/config.php if you like
-- edit your server's php.ini and set short_open_tag=On
-- fill the database with some test data
+- Clone git repo
+- ```docker-compose up```
 
 ## Language
 
-The interface is german. It's on the roadmap to include a translation to english
+The interface is _german_. I'm planning to implement a translation to english by time.
+
+## Playing with test data
+
+When docker-compose has done it's work you can login with
+_test@admin.de_ and password _test_ as admin or
+_test@user.de_ and password _test_ as user.
