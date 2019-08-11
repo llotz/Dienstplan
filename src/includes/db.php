@@ -1,13 +1,13 @@
 <?php
-    // Get php Framework for mysql
+    // Get php Framewprk for mysql
     // https://github.com/ThingEngineer/PHP-MySQLi-Database-Class
     include_once("libs/MysqliDb.php");
 
     class dbConn{
-        private $servername = "localhost:3306";
-        private $dbname = "dbname";
-        private $username = "username";
-        private $password = "password";
+        private $servername = "db";
+        private $dbname = "dienstplan";
+        private $username = "root";
+        private $password = "root";
 
         function GetConnection(){
             return new mysqli($this->servername, $this->username, $this->password, $this->dbname, 3306, 'utf8');

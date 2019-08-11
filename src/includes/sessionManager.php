@@ -29,6 +29,4 @@ class SessionManager{
         return $_SESSION['userId'];
     }
 }
-
-$sessionManager = new SessionManager();
 ?>
