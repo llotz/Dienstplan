@@ -110,7 +110,11 @@ CREATE TABLE IF NOT EXISTS `Training` (
   `LastChange` datetime DEFAULT CURRENT_TIMESTAMP,
   `IsEvent` bit(1) DEFAULT b'0',
   `Comment` varchar(511) DEFAULT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`Id`),
+  KEY `CityId` (`CityId`),
+  KEY `TrainingTypeId` (`TrainingTypeId`),
+  CONSTRAINT `Training_ibfk_1` FOREIGN KEY (`CityId`) REFERENCES `City` (`Id`),
+  CONSTRAINT `Training_ibfk_2` FOREIGN KEY (`TrainingTypeId`) REFERENCES `TrainingType` (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COMMENT='Tabelle für Übungsdienste';
 
 /*!40000 ALTER TABLE `Training` DISABLE KEYS */;
@@ -153,7 +157,13 @@ REPLACE INTO `User` (`Id`, `Login`, `Name`, `Role`, `Mail`, `Password`, `PassMus
 CREATE TABLE IF NOT EXISTS `User_Department` (
   `UserId` int(11) NOT NULL,
   `DepartmentId` int(11) NOT NULL,
-  `RoleId` int(11) NOT NULL
+  `RoleId` int(11) NOT NULL,
+  KEY `UserId` (`UserId`),
+  KEY `DepartmentId` (`DepartmentId`,`RoleId`),
+  KEY `RoleId` (`RoleId`),
+  CONSTRAINT `User_Department_ibfk_1` FOREIGN KEY (`DepartmentId`) REFERENCES `Department` (`Id`),
+  CONSTRAINT `User_Department_ibfk_2` FOREIGN KEY (`RoleId`) REFERENCES `Role` (`Id`),
+  CONSTRAINT `User_Department_ibfk_3` FOREIGN KEY (`UserId`) REFERENCES `User` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40000 ALTER TABLE `User_Department` DISABLE KEYS */;
