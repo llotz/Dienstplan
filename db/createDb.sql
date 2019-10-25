@@ -49,6 +49,7 @@ REPLACE INTO `Department` (`Id`, `Name`, `CityId`) VALUES
 	(2, 'Feuerwehr TestDorf', 2),
 	(3, 'Feuerwehr Sonstige', 3),
 	(4, 'Stadt TestStadt', 1);
+  
 /*!40000 ALTER TABLE `Department` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `Permission` (
