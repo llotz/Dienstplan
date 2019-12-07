@@ -3,4 +3,4 @@
 ?>
 <h3>Kalender</h3>
 
-Hier kommt ein Kalendar.
+Hier kommt ein Kalender.
