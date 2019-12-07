@@ -41,7 +41,9 @@
           Training.Description as Thema, 
           IsEvent,
           Sector.Name as Abteilung,
-          Week(Training.Start, 1) as KW
+          Week(Training.Start, 1) as KW,
+          Start,
+          End
           from Training
           LEFT JOIN Category ON CategoryId = Category.Id
           LEFT JOIN Department ON DepartmentId = Department.Id

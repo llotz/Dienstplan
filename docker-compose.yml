@@ -1,16 +1,16 @@
-version: '3.3'
+version: "3.3"
 services:
   web:
     build: .
-    container_name: php7.3 
-    depends_on: 
+    container_name: php7.4
+    depends_on:
       - db
-    volumes: 
+    volumes:
       - ./src:/var/www/html/
       - ./php.ini:/usr/local/etc/php/conf.d/30-custom.ini
     ports:
       - 80:80
-  db: 
+  db:
     container_name: mysql8
     build:
       context: ./db
@@ -24,4 +24,3 @@ services:
       MYSQL_PASSWORD: devpass
     ports:
       - 3306:3306
-

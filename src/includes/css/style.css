@@ -226,13 +226,13 @@ label {
 
 .phpgridder-cell {
   flex-basis: 100%;
-  padding: 8px 4px;
+  padding: 4px 4px;
 }
 
 .phpgridder-titlecell {
   flex-basis: 100%;
   font-size: 13pt;
-  padding: 8px 4px;
+  padding: 4px 4px;
 }
 
 .input-field {
