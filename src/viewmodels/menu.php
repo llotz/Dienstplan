@@ -1,7 +1,8 @@
 <?php
     // standard Pages
     $menuLinks = array(
-        array("Übersicht", "/")
+        array("Übersicht", "/"),
+        array("Kalender", "/calendar")
     );
 
     // logged in Pages

@@ -1,6 +1,7 @@
 <?php
 
 class Appointment{
+  public $id;
   public $start;
   public $end;
   public $organizer;

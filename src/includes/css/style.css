@@ -245,10 +245,19 @@ label {
 }
 
 .cal-table {
+  border-collapse: collapse;
+}
+
+.cal-row {
+  border-top: 1px solid white;
 }
 
 .cal-highlightcell {
   background-color: #3da180;
+}
+
+.cal-highlightcell a {
+  color: white;
 }
 
 .input-field {

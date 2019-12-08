@@ -16,13 +16,14 @@ class CalMaker{
     $renderedTable = "<table class='cal-table'>";
     $renderedTable .= $this->renderHead($days, date('F', mktime(0, 0, 0, $month))." $year");
     foreach($departments as $department){
-      $renderedTable .= "<tr>";
+      $renderedTable .= "<tr class='cal-row'>";
       $renderedTable .= "<td>$department</td>";
       foreach($days as $day){
         $dayApps = $this->getAppointmentsAtDate($renderAppointments, $department, $day, $month, $year);
         
         if(count($dayApps) > 0){
-          $renderedTable .= "<td class='cal-highlightcell'>D";
+          $id = $dayApps[0]['Id'];
+          $renderedTable .= "<td class='cal-highlightcell'><a href=/training/$id>D</a>";
         }else 
           $renderedTable .= "<td>";
         $renderedTable .= "</td>";

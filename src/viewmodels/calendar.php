@@ -14,6 +14,7 @@
   $appointments = array();
   foreach($trainings as $training){
     $a = new Appointment();
+    $a->id = $training["Id"];
     $a->start = $training["Start"];
     $a->end = $training["End"];
     $a->organizer = $training["Feuerwehr"];
