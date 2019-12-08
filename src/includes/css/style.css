@@ -235,6 +235,22 @@ label {
   padding: 4px 4px;
 }
 
+.cal-headrow {
+  background-color: #3da180;
+  color: #f7f7f7;
+}
+
+.cal-headcell {
+  padding: 2px;
+}
+
+.cal-table {
+}
+
+.cal-highlightcell {
+  background-color: #3da180;
+}
+
 .input-field {
   padding: 4px;
 }

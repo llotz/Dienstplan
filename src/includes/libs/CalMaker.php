@@ -13,7 +13,24 @@ class CalMaker{
     $renderAppointments = $this->getCurrentMonthAppointments($this->appointments, $year, $month);
     $departments = $this->getFireDepartmentStrings($renderAppointments);
     $days = $this->getDaysOfMonth($year, $month);
-    print_r($days);
+    $renderedTable = "<table class='cal-table'>";
+    $renderedTable .= $this->renderHead($days, date('F', mktime(0, 0, 0, $month)));
+    foreach($departments as $department){
+      $renderedTable .= "<tr>";
+      $renderedTable .= "<td>$department</td>";
+      foreach($days as $day){
+        $dayApps = $this->getAppointmentsAtDate($renderAppointments, $department, $day, $month, $year);
+        
+        if(count($dayApps) > 0){
+          $renderedTable .= "<td class='cal-highlightcell'>D";
+        }else 
+          $renderedTable .= "<td>";
+        $renderedTable .= "</td>";
+      }
+      $renderedTable .= "</tr>";
+    }
+    $renderedTable .= "</table>";
+    return $renderedTable;
   }
 
   function getCurrentMonthAppointments($appointments, $year, $month){
@@ -42,6 +59,29 @@ class CalMaker{
     for($i = 1; $i <= $days; $i++)
       $dayArray[] = $i;
     return $dayArray;
+  }
+
+  function getAppointmentsAtDate($appointments, $department, $day, $month, $year){
+    $appsAtDay = array();
+    $targetDay = "$year:$month:$day";
+    foreach ($appointments as $app){
+      if($app["Feuerwehr"]==$department){
+        $dayString = date("Y:m:d",strtotime($app["Start"]));
+        if($dayString == $targetDay)
+          $appsAtDay[] = $app;
+      }
+    }
+    return $appsAtDay;
+  }
+
+  function renderHead($days, $monthName){
+    $renderedHead = "<tr class='cal-headrow'>";
+    $renderedHead .= "<td class='cal-headcell'>$monthName</td>";
+    foreach($days as $day){
+      $renderedHead .= "<td class='cal-headcell'>$day</td>";
+    }
+    $renderedHead .= "</tr>";
+    return $renderedHead;
   }
 }
 
