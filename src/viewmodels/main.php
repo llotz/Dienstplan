@@ -60,7 +60,7 @@
         $grid .= "<p class='calendar-week-hint'>KW $kw</p>";
         $phpGridder = new PhpGridder($kwTraining);
         $phpGridder->rowDivClassConditions = $rowDivClassConditions;
-        $phpGridder->columnsToHide = array("Id", "IsEvent", "Ort", "KW");
+        $phpGridder->columnsToHide = array("Id", "IsEvent", "Ort", "KW", "Start", "End");
 		$phpGridder->cellDivClasses = $cellDivClasses;
         $phpGridder->rowLinks = array("training/%s", "Id");
         $phpGridder->columnWidths = array("Feuerwehr" => 250);

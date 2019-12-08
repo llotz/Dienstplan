@@ -35,15 +35,15 @@
           global $db;
 
           $trainings = $db->rawQuery("SELECT Training.Id, 
+          DATE_FORMAT(Start, '%w, %d.%m. %H:%i Uhr') as Beginn,
           Department.Name as Feuerwehr, 
-          City.Name as Ort,
-          DATE_FORMAT(Start, '%w, %d.%m. %H:%i Uhr') as Beginn, 
+          City.Name as Ort, 
           Training.Description as Thema, 
           IsEvent,
           Sector.Name as Abteilung,
           Week(Training.Start, 1) as KW,
-          Start,
-          End
+          Start as Start,
+          End as End
           from Training
           LEFT JOIN Category ON CategoryId = Category.Id
           LEFT JOIN Department ON DepartmentId = Department.Id

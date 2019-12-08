@@ -3,9 +3,8 @@
     $userMail = $sessionManager->getMailAdress();
 
     $trainings = $db->rawQuery("SELECT Training.Id, 
-    Department.Name as Feuerwehr, 
-    
     DATE_FORMAT(Start, '%w, %d.%m. %H:%i Uhr') as Beginn, 
+    Department.Name as Feuerwehr, 
     Training.Description as Thema,
     City.Name as Ort,
     IsEvent,

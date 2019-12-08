@@ -14,4 +14,5 @@
   }
   
   $calMaker = new CalMaker($appointments);
+  $calendar = $calMaker->render(date("Y"), date("m"));
 ?>
