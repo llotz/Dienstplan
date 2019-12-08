@@ -246,6 +246,7 @@ label {
 
 .cal-table {
   border-collapse: collapse;
+  margin-bottom: 10px;
 }
 
 .cal-row {

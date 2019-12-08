@@ -23,7 +23,8 @@ class CalMaker{
         
         if(count($dayApps) > 0){
           $id = $dayApps[0]['Id'];
-          $renderedTable .= "<td class='cal-highlightcell'><a href=/training/$id>D</a>";
+          $letter = (($dayApps[0]['IsEvent'])?'E' : 'D');
+          $renderedTable .= "<td class='cal-highlightcell'><a href=/training/$id>$letter</a>";
         }else 
           $renderedTable .= "<td>";
         $renderedTable .= "</td>";

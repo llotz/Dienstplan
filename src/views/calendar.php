@@ -4,3 +4,5 @@
 <h3>Kalender</h3>
 
 <?=$calendar?>
+
+D - Dienst / E - Ereignis
