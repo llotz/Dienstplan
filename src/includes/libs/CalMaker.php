@@ -14,7 +14,7 @@ class CalMaker{
     $departments = $this->getFireDepartmentStrings($renderAppointments);
     $days = $this->getDaysOfMonth($year, $month);
     $renderedTable = "<table class='cal-table'>";
-    $renderedTable .= $this->renderHead($days, date('F', mktime(0, 0, 0, $month)));
+    $renderedTable .= $this->renderHead($days, date('F', mktime(0, 0, 0, $month))." $year");
     foreach($departments as $department){
       $renderedTable .= "<tr>";
       $renderedTable .= "<td>$department</td>";
