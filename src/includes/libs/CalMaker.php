@@ -57,7 +57,7 @@ class CalMaker{
     $days = date('t', mktime(0, 0, 0, $month, 1, $year));
     $dayArray = array();
     for($i = 1; $i <= $days; $i++)
-      $dayArray[] = $i;
+      $dayArray[] = sprintf('%02d', $i);
     return $dayArray;
   }
 

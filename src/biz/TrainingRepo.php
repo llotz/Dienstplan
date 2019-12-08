@@ -28,13 +28,11 @@
                 return false;
         }
 
-        public function GetTrainings($where, $interval){
-          if($interval == "")
-            $interval = 30;
+        public function GetTrainings($where){
 
           global $db;
 
-          $trainings = $db->rawQuery("SELECT Training.Id, 
+					$query = "SELECT Training.Id, 
           DATE_FORMAT(Start, '%w, %d.%m. %H:%i Uhr') as Beginn,
           Department.Name as Feuerwehr, 
           City.Name as Ort, 
@@ -52,8 +50,9 @@
           LEFT JOIN Sector ON SectorId = Sector.Id
           WHERE Training.Public = true
           $where 
-          AND End > NOW() AND Start < DATE_ADD(Now(), Interval $interval DAY)
-          ORDER BY Start ASC;");
+					ORDER BY Start ASC;";
+
+          $trainings = $db->rawQuery($query);
       
           $weekday = array(
               "0" => "Sonntag",
@@ -65,7 +64,7 @@
               "6" => "Samstag",
           );
           
-          // replace that week day number with a string (fuck sql)
+          // replace that week day number with a string
           for($i = 0; $i < count($trainings); $i++){
               $foo = $trainings[$i]["Beginn"];
               $trainings[$i]["Beginn"] = $weekday[substr($foo, 0, 1)] . substr($foo, 1);

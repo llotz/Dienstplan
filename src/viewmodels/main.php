@@ -19,7 +19,7 @@
 
     $interval = 180;
 
-    $where = "";
+    $where = " AND END > NOW()";
 
     if(isset($_GET["department"]) && is_numeric($_GET["department"])){
         $departmentId = $_GET["department"];
@@ -35,8 +35,10 @@
         if($_GET["interval"] > 0)
             $interval = $_GET["interval"];
     }
+
+    $where .=  "AND Start < DATE_ADD(Now(), Interval $interval DAY)";
     
-    $trainings = $trainingRepo->GetTrainings($where, $interval);
+    $trainings = $trainingRepo->GetTrainings($where);
 
     $rowDivClassConditions = array(
       array("IsEvent", "1", "event")	
