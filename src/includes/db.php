@@ -9,7 +9,6 @@
         private $username = "root";
         private $password = "root";
 
-        
         function GetConnection(){
             return new mysqli($this->servername, $this->username, $this->password, $this->dbname, 3306, 'utf8');
         }

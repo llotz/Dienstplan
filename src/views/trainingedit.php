@@ -43,7 +43,7 @@ include_once(getViewModel("trainingedit"));
               <input type="text" name="endtime" value="<?=date('H:i',$end)?>" size=5>Uhr</p>-->
           <!--<p>Art: <?=GetHtmlSelector($trainingTypes, "Id", "Name", $trainingTypeId)?>-->
           <!--<p>Thema/Beschreibung:<br><input type="text" name="desctiption" size="50" value="<?=$description?>"></p>-->
-        <p>Thema<br><textarea rows="2" cols="30" name="topic" placeholder="Kurz und knackig"><?=$description?></textarea></p>
+        <p>Thema<br><textarea rows="2" cols="30" name="topic" placeholder="Kurz und knackig" required><?=$description?></textarea></p>
         <p>Beschreibung<br><textarea rows="4" cols="30" name="description" placeholder="Eine kurze Beschreibung der Inhalte (kann leer bleiben)"><?=$comment?></textarea></p>
         <p><input onClick="window.history.go(-1); return false;" type="button" value="Zurück">
 			<?if($id != "" && $id != 0){?><a href="/training/<?=$id?>"><input type="button" value="Ansicht"></a><?}?>
