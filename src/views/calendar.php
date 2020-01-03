@@ -3,6 +3,14 @@
 ?>
 <h3>Kalender</h3>
 
+<form class="top-page-filter-form" method="GET">
+	Monat
+	<select name="month">
+		<?=$monthOptionsArray?>
+	</select>
+	<input type=submit value=Anwenden></input>
+</form>
+
 <?=$calendar?>
 
-D - Dienst / E - Ereignis
+<p class="cal-legend">D - Dienst / E - Ereignis</p>

@@ -1,3 +1,3 @@
 <div class="footer">
-    <?=$website_author?>
+    by <?=$website_author?>
 </div>

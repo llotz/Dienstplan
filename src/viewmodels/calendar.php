@@ -1,13 +1,25 @@
 <?php
   include_once("biz/TrainingRepo.php");
-  include_once("includes/libs/CalMaker.php");
+	include_once("includes/libs/CalMaker.php");
+	include_once("includes/MonthGenerator.php");
+	$monthGenerator = new MonthGenerator();
   $trainingRepo = new TrainingRepo();
 
   $year = date("Y");
-  $month = date("m");
-  $lastDayOfMonth = date('t', mktime(0, 0, 0, $month, 1, $year));
+	$month = date("m");
+	$shownYear = $year;
+	$shownMonth = $month;
+	$selectedMonth = "$year-$month";
 
-  $where = " AND START BETWEEN '$year-$month-01' AND '$year-$month-$lastDayOfMonth'";
+  if(isset($_GET["month"]) && preg_match('/^\d{4}-(\d{2})$/', $_GET['month'])){
+		$selectedMonth = $_GET["month"];
+		$splitted = explode('-', $selectedMonth);
+		$shownYear = $splitted[0];
+		$shownMonth = $splitted[1];
+	}
+
+	$lastDayOfMonth = date('t', mktime(0, 0, 0, $month, 1, $year));
+  $where = " AND START BETWEEN '$shownYear-$shownMonth-01' AND '$shownYear-$shownMonth-$lastDayOfMonth'";
 
   $trainings = $trainingRepo->GetTrainings($where);
 
@@ -24,5 +36,10 @@
   }
   
   $calMaker = new CalMaker($appointments);
-  $calendar = $calMaker->render($year, $month);
+	$calendar = $calMaker->render($shownYear, $shownMonth);
+	
+	$monthOptionsArray = $monthGenerator->GetOptionsArray(
+		$monthGenerator->GetMonthRange($year, $month, 6)
+		,$selectedMonth);
+	
 ?>

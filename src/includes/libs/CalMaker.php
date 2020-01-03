@@ -12,6 +12,10 @@ class CalMaker{
   public function render($year, $month){
     $renderAppointments = $this->getCurrentMonthAppointments($this->appointments, $year, $month);
     $departments = $this->getFireDepartmentStrings($renderAppointments);
+    if(count($departments) == 0){
+      return "<p class='cal-not-found-message'>Es gibt noch keine geplanten Dienste für diesen Monat.</p>";
+    }
+    
     $days = $this->getDaysOfMonth($year, $month);
     $renderedTable = "<table class='cal-table'>";
     $renderedTable .= $this->renderHead($days, date('F', mktime(0, 0, 0, $month))." $year");
