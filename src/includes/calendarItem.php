@@ -36,7 +36,7 @@ END:VCALENDAR";
     }
     function show() {
 		ob_end_clean();
-        header("Content-type:text/calendar");
+        header("Content-type:text/calendar charset=utf-8");
         header('Content-Disposition: attachment; filename="'.$this->name.'.ics"');
         header('Content-Length: '.strlen($this->data));
         header('Connection: close');

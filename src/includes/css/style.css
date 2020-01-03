@@ -114,6 +114,10 @@ a:hover {
 	padding: 10px 20px;
 }
 
+.page-link {
+	margin: 10px;
+}
+
 .calendar-week-hint {
 	font-size: 1.2em;
 	margin-bottom: -8px;
