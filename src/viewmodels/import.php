@@ -3,9 +3,11 @@
 include_once("includes/importMassData.php");
 include_once("biz/DepartmentRepo.php");
 include_once('biz/SectorRepo.php');
+include_once('biz/TrainingRepo.php');
 
 $departmentRepo = new DepartmentRepo();
 $sectorRepo = new SectorRepo();
+$trainingRepo = new TrainingRepo();
 
 $sectors = $sectorRepo->GetAll();
 $departments = $departmentRepo->GetWherePermittedEditing();
@@ -21,26 +23,21 @@ if($_FILES['importFile']['tmp_name'] != "" &&
 	$departmentId = $_POST['department'];
 	$sectorId = $_POST['sector'];
 
-	// Check if submitted department is valid for user
-	$userHasPermission = false;
-	array_walk($departments, function($value){
-		global $departmentId;
-		global $userHasPermission;
-		if($value['Id']==$departmentId)
-			$userHasPermission = true;
-	});
-
-	if(!$userHasPermission)
-		$error = "Sie haben keine Berechtigung, für diese Wehr einen Dienst zu planen!";
+	$userHasPermission = $importMassData->UserHasPermission($departments, $departmentId);
 	
-	$trainings = $importMassData->GetTrainingsFromImportStructure($sectorId, $departmentId, $importStructures);
-	$isValid = $importMassData->IsImportDataValid($trainings);
-	if(!$isValid)
+	if(!$userHasPermission){
 		$error = $importMassData->lastError;
-		
-	print_r($trainings);
-	
+	}else{
+		$trainings = $importMassData->GetTrainingsFromImportStructure($sectorId, $departmentId, $importStructures);
+		$isValid = $importMassData->IsImportDataValid($trainings);
+		if(!$isValid)
+			$error = $importMassData->lastError;
+		else{
+			// push array to database after sanitizing inputs
+			foreach($trainings as $training)
+				$trainingRepo->Insert($training);
+			$message = "Datensätze erfolgreich importiert";
+		}
+	}
 }
-
-
 ?>

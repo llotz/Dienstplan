@@ -18,7 +18,7 @@ class ImportMassData{
 			$delimiter = ',';
 		for($i = 1; $i < count($lines); $i++)
 		{
-			$splitted = explode($delimiter, $lines[$i]);
+			$splitted = str_getcsv($lines[$i], $delimiter);
 			$importStructure = new ImportStructure();
 			$importStructure->date = $splitted[0];
 			$importStructure->starttime = $splitted[1];
@@ -46,28 +46,58 @@ class ImportMassData{
 			$training['endtime'] = $is->endtime;
 			$training['topic'] = $is->description;
 			$training['description'] = $is->comment;
-			$training['isEvent'] = (trim($is->isEvent) == 'x')?true:false;
+			if(trim($is->isEvent) == 'x')
+				$training['isEvent'] = true;
 			$trainings[] = $training;
 		}
 		return $trainings;
 	}
 
+	public function UserHasPermission($allowedDepartments, $departmentToPlan){
+		foreach($allowedDepartments as $department){
+			if($department['Id'] == $departmentToPlan)
+				return true;
+		}
+		$this->lastError = $error = "Sie haben keine Berechtigung, für diese Wehr einen Dienst zu planen!";
+		return false;
+	}
+
 	public function IsImportDataValid($trainings){
 		$isValid = true;
 		foreach($trainings as $training){
-			$start = GetDateTimeStringFromDateAndTimeString($training['startdate'], $training['starttime']);
-			$end = GetDateTimeStringFromDateAndTimeString($training['startdate'], $training['endtime']);
-			if($start > $end){
-				$this->lastError = "Der Startzeitpunkt ist nach dem Endzeitpunkt definiert: $start";
+			$start = $training['startdate'].' '. $training['starttime'];
+			$end = $training['startdate'].' '. $training['endtime'];
+			if(!validateDate($start)){
+				$this->lastError = 
+				"Startzeit hat ein ungültiges Format: $start";
+				return false;
+			}
+			if(!validateDate($end)){
+				$this->lastError =
+				"Endzeit hat ein ungültiges Format: $end";
+				return false;
+			}
+
+			$startString = GetDateTimeStringFromDateAndTimeString($training['startdate'], $training['starttime']);
+			$endString = GetDateTimeStringFromDateAndTimeString($training['startdate'], $training['endtime']);
+			$startDate = GetDateTimeFromDateAndTimeString($training['startdate'], $training['starttime']);
+			$endDate =  GetDateTimeFromDateAndTimeString($training['startdate'], $training['endtime']);
+			
+			if($startDate > $endDate){
+				$this->lastError = 
+				"Der Startzeitpunkt ist nach dem Endzeitpunkt 
+				definiert: Start: $startString Ende: $endString";
+				return false;
+			}
+			if($startDate < new DateTime('now')){
+				$this->lastError = 
+				"Der Startzeitpunkt liegt in der Vergangenheit: 
+				Start: $startString";
 				return false;
 			}
 		}
 		return $isValid;
 	}
-
-	// TODO push array to database after sanitizing inputs
-	// TODO validate date and other stuff
-	// TODO CSV remove "" and split ignore commas inside ""
 }
 
 ?>

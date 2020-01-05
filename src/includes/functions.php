@@ -142,4 +142,10 @@
         $content = file_get_contents($path);
         return json_decode($content, true);
     }
+
+    function validateDate($date, $format = 'Y-m-d H:i')
+    { // thanks stackoverflow
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) === $date;
+    }
 ?>

@@ -3,6 +3,7 @@ include_once(getViewModel('import'));
 ?>
 <h3>Import</h3>
 <p class="page-link"><a href="/import_example">[Download: Import Vorlage]</a></p>
+
 <form method="POST" enctype="multipart/form-data">
 	<div class="input-field">
 		<div class="input-description">Plan für</div> 
