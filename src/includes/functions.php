@@ -127,8 +127,12 @@
         $showPageContent = $showContent;
     }
 
+    function GetDateTimeFromDateAndTimeString($date, $time){
+        return new DateTime($date . ' ' . $time);
+    }
+
     function GetDateTimeStringFromDateAndTimeString($date, $time){
-        $dateTime = new DateTime($date . " " . $time);
+        $dateTime = GetDateTimeFromDateAndTimeString($date, $time);
         return $dateTime->format('Y-m-d H:i:s');
     }
 

@@ -19,7 +19,10 @@ class DepartmentRepo extends BaseRepo{
         LEFT JOIN City c ON c.Id = d.CityId
         WHERE p.Permissionlevel >=50
         AND u.Mail = '".$sessionManager->getMailAdress()."'");
+    }
 
+    public function GetAnus(){
+        return $this->tableName;
     }
 }
 
