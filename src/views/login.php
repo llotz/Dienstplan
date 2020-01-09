@@ -9,6 +9,6 @@
     <input type="password" name="password"><br>
     <br>
     <input type="submit" value="Login"><br><br>
-    Or <a href="<?=getHtmlLink('register')?>">register</a><br>
-    <a href="<?=getHtmlLink('main')?>">back to main page</a>
+    <a href="<?=getHtmlLink('register')?>">Registrieren</a><br>
+    <a href="<?=getHtmlLink('main')?>">zurück zur Startseite</a>
 </form>
