@@ -1,7 +1,7 @@
 <?php
   include_once("biz/TrainingRepo.php");
 	include_once("includes/libs/CalMaker.php");
-	include_once("includes/MonthGenerator.php");
+	include_once("includes/monthGenerator.php");
 	$monthGenerator = new MonthGenerator();
   $trainingRepo = new TrainingRepo();
 
