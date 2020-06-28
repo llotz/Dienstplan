@@ -28,7 +28,14 @@ class CalMaker{
         if(count($dayApps) > 0){
           $id = $dayApps[0]['Id'];
           $letter = (($dayApps[0]['IsEvent'])?'E' : 'D');
-          $renderedTable .= "<td class='cal-highlightcell'><a href=/training/$id>$letter</a>";
+          $tooltip = $this->getToolTipText($dayApps);
+          $renderedTable .= "
+            <td class='cal-highlightcell'>
+            <div class='tooltip'>
+            <a href=/training/$id>$letter</a>
+            <span class='tooltiptext'>$tooltip</span>
+          </div>
+          ";
         }else 
           $renderedTable .= "<td>";
         $renderedTable .= "</td>";
@@ -37,6 +44,10 @@ class CalMaker{
     }
     $renderedTable .= "</table>";
     return $renderedTable;
+  }
+
+  function getToolTipText($dayApps){
+    return date("H:i", strtotime($dayApps[0]["Start"]))." Uhr ". $dayApps[0]["Thema"];
   }
 
   function getCurrentMonthAppointments($appointments, $year, $month){
