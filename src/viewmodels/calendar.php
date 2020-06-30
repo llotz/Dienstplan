@@ -39,7 +39,7 @@
 	$calendar = $calMaker->render($shownYear, $shownMonth);
 	
 	$monthOptionsArray = $monthGenerator->GetOptionsArray(
-		$monthGenerator->GetMonthRange($year, $month, 6)
+		$monthGenerator->GetMonthRange($year, $month, 9)
 		,$selectedMonth);
 	
 ?>

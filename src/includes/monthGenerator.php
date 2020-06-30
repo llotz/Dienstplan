@@ -28,10 +28,29 @@ class MonthGenerator{
 			$selected = "";
 			if($selectedMonth == $yearMonth)
 				$selected = "selected";
+			$monthNum = intval(explode("-", $yearMonth)[1]);
+			$monthName = $this->GetGermanMonthString($monthNum);
+			$year = explode("-", $yearMonth)[0];
 			$renderedOptionsString .= 
-				"<option value='$yearMonth' $selected>$yearMonth</option>";
+				"<option value='$yearMonth' $selected>$year - $monthName</option>";
 		}
 		return $renderedOptionsString;
+	}
+
+	public function GetGermanMonthString($monthNumber){
+		$monate = array(1=>"Januar",
+                2=>"Februar",
+                3=>"März",
+                4=>"April",
+                5=>"Mai",
+                6=>"Juni",
+                7=>"Juli",
+                8=>"August",
+                9=>"September",
+                10=>"Oktober",
+                11=>"November",
+                12=>"Dezember");
+		return $monate[$monthNumber];
 	}
 }
 

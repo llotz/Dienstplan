@@ -349,8 +349,6 @@ label {
 	.filter-item select {
 		width: 100%;
 	}
-	.filter-item input {
-	}
 	label {
 		display: flex;
 		flex-direction: row-reverse;
