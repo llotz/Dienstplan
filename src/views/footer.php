@@ -1,3 +1,3 @@
 <div class="footer">
-    by <?=$website_author?>
+    made with love by <?=$website_author?>
 </div>
