@@ -97,7 +97,7 @@ if(array_key_exists("delete", $_POST)){
         ShowError("Sie haben keine Berechtigungen, diesen Dienst zu löschen!", false);
     $trainingRepo->Delete($_POST["id"]);
 }
-else if($id != "")
+else if($id != 0)
 {
     $training = $trainingRepo->GetById($id);
     if(!$trainingRepo->CheckEditPermission($id))
@@ -123,5 +123,3 @@ if($isNew){
     $titleText = "Dienst bearbeiten";
     $saveButtonName = "update";
 }
-
-?>
