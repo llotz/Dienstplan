@@ -120,6 +120,8 @@
             global $sessionManager;
 
             $date = $values["startdate"];
+            if(validateDate($date, "d.m.Y"))
+                $date = convertDateTimeString($date, "d.m.Y", "Y-m-d");
             $startTime = $values["starttime"];
             $endTime = $values["endtime"];
 
@@ -163,6 +165,3 @@
             }
         }
     }
-
-
-?>

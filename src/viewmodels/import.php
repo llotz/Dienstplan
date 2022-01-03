@@ -12,32 +12,37 @@ $trainingRepo = new TrainingRepo();
 $sectors = $sectorRepo->GetAll();
 $departments = $departmentRepo->GetWherePermittedEditing();
 
-if($_FILES['importFile']['tmp_name'] != "" &&
-	 isset($_POST['department']) && 
-	 is_numeric($_POST['department']) &&
-	 isset($_POST['sector']) && 
-	 is_numeric($_POST['sector'])){
-	
+$departmentId = 0;
+$sectorId = 0;
+
+if (
+	isset($_FILES['importFile']) &&
+	$_FILES['importFile']['tmp_name'] != "" &&
+	isset($_POST['department']) &&
+	is_numeric($_POST['department']) &&
+	isset($_POST['sector']) &&
+	is_numeric($_POST['sector'])
+) {
+
 	$importMassData = new ImportMassData($_FILES['importFile']['tmp_name']);
-	$importStructures=$importMassData->GetContentAsImportStructure();
+	$importStructures = $importMassData->GetContentAsImportStructure();
 	$departmentId = $_POST['department'];
 	$sectorId = $_POST['sector'];
 
 	$userHasPermission = $importMassData->UserHasPermission($departments, $departmentId);
-	
-	if(!$userHasPermission){
+
+	if (!$userHasPermission) {
 		$error = $importMassData->lastError;
-	}else{
+	} else {
 		$trainings = $importMassData->GetTrainingsFromImportStructure($sectorId, $departmentId, $importStructures);
 		$isValid = $importMassData->IsImportDataValid($trainings);
-		if(!$isValid)
+		if (!$isValid)
 			$error = $importMassData->lastError;
-		else{
+		else {
 			// push array to database after sanitizing inputs
-			foreach($trainings as $training)
+			foreach ($trainings as $training)
 				$trainingRepo->Insert($training);
 			$message = "Datensätze erfolgreich importiert";
 		}
 	}
 }
-?>
