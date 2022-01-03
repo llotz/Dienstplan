@@ -19,9 +19,9 @@ class CalMaker
       return "<p class='cal-not-found-message'>Es gibt noch keine geplanten Dienste für diesen Monat.</p>";
     }
 
-    $days = $this->getDaysOfMonth($year, $month);
+    $days = $this->getDaysOfMonthString($year, $month);
     $renderedTable = "<table class='cal-table'>";
-    $renderedTable .= $this->renderHead($days, date('F', mktime(0, 0, 0, $month)) . " $year");
+    $renderedTable .= $this->renderHead($days, $month, $year);
     foreach ($departments as $department) {
       $renderedTable .= "<tr class='cal-row'>";
       $renderedTable .= "<td>$department</td>";
@@ -82,12 +82,13 @@ class CalMaker
     return $departments;
   }
 
-  function getDaysOfMonth($year, $month)
+  function getDaysOfMonthString($year, $month)
   {
     $days = date('t', mktime(0, 0, 0, $month, 1, $year));
     $dayArray = array();
-    for ($i = 1; $i <= $days; $i++)
+    for ($i = 1; $i <= $days; $i++) {
       $dayArray[] = sprintf('%02d', $i);
+    }
     return $dayArray;
   }
 
@@ -105,14 +106,29 @@ class CalMaker
     return $appsAtDay;
   }
 
-  function renderHead($days, $monthName)
+  function renderHead($days, $month, $year)
   {
     $renderedHead = "<tr class='cal-headrow'>";
-    $renderedHead .= "<td class='cal-headcell'>$monthName</td>";
+    $renderedHead .= "<td class='cal-headcell'>" . date('F', mktime(0, 0, 0, $month)) . " $year" . "</td>";
     foreach ($days as $day) {
-      $renderedHead .= "<td class='cal-headcell'>$day</td>";
+      $dayOfWeek = date("N", mktime(0, 0, 0, $month, (int)$day, $year));
+      $renderedHead .= "<td class='cal-headcell'>" . $this->getShortWeekDayName($dayOfWeek) . "<br>" . $day . "</td>";
     }
     $renderedHead .= "</tr>";
     return $renderedHead;
+  }
+
+  function getShortWeekDayName($dayOfWeek)
+  {
+    $days = array(
+      1 => "Mo",
+      2 => "Di",
+      3 => "Mi",
+      4 => "Do",
+      5 => "Fr",
+      6 => "Sa",
+      7 => "So"
+    );
+    return $days[$dayOfWeek];
   }
 }

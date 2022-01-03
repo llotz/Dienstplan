@@ -4,7 +4,7 @@ $website_title = "Dienstplan";
 $website_author = "Lukas Lotz";
 $website_description = "Übungsdienstplanung der Feuerwehr Testhausen";
 
-$debugmode = false;
+$debugmode = true;
 $show_title = true;
 
 // Formatting stuff
