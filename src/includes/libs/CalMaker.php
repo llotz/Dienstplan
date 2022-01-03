@@ -111,8 +111,10 @@ class CalMaker
     $renderedHead = "<tr class='cal-headrow'>";
     $renderedHead .= "<td class='cal-headcell'>" . date('F', mktime(0, 0, 0, $month)) . " $year" . "</td>";
     foreach ($days as $day) {
-      $dayOfWeek = date("N", mktime(0, 0, 0, $month, (int)$day, $year));
-      $renderedHead .= "<td class='cal-headcell'>" . $this->getShortWeekDayName($dayOfWeek) . "<br>" . $day . "</td>";
+      $time = mktime(0, 0, 0, $month, (int)$day, $year);
+      $dayOfWeek = date("N", $time);
+      $isToday = date("Y-m-d", $time) == date("Y-m-d", time());
+      $renderedHead .= "<td class='cal-headcell" . (($isToday) ? " cal-headcell-today" : "") . "'>" . $this->getShortWeekDayName($dayOfWeek) . "<br>" . $day . "</td>";
     }
     $renderedHead .= "</tr>";
     return $renderedHead;

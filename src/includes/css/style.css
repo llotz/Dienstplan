@@ -248,6 +248,12 @@ label {
 	padding: 2px;
 }
 
+.cal-headcell-today {
+	background-color: #74ff87;
+	color: black;
+	font-weight: bolder;
+}
+
 .cal-table {
 	border-collapse: collapse;
 	margin-bottom: 10px;
