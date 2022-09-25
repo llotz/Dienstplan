@@ -112,7 +112,6 @@ class CalMaker
     }
   }
   
-  
   function getAppointmentsAtDate($appointments, $department, $day, $month, $year)
   {
     $appsAtDay = array();
