@@ -5,12 +5,12 @@ include_once("models/Appointment.php");
 class CalMaker
 {
   public $appointments;
-
+  
   public function __construct($appointments)
   {
     $this->appointments = $appointments;
   }
-
+  
   public function render($year, $month)
   {
     $renderAppointments = $this->getCurrentMonthAppointments($this->appointments, $year, $month);
@@ -18,48 +18,54 @@ class CalMaker
     if (count($departments) == 0) {
       return "<p class='cal-not-found-message'>Es gibt noch keine geplanten Dienste für diesen Monat.</p>";
     }
-
-    $days = $this->getDaysOfMonthString($year, $month);
-    $renderedTable = "<table class='cal-table'>";
-    $renderedTable .= $this->renderHead($days, $month, $year);
-    foreach ($departments as $department) {
-      $renderedTable .= "<tr class='cal-row'>";
-      $renderedTable .= "<td>$department</td>";
-      foreach ($days as $day) {
-        $dayApps = $this->getAppointmentsAtDate($renderAppointments, $department, $day, $month, $year);
-
-        if (count($dayApps) > 0) {
-          $id = $dayApps[0]['Id'];
-          $letter = (($dayApps[0]['IsEvent']) ? 'E' : 'D');
-          $tooltip = $this->getToolTipText($dayApps);
-          $renderedTable .= "
+    
+    $daysTotal = $this->getDaysOfMonthString($year, $month);
+    $renderedCalendar= "<div class='calendar'>";
+    for ($week=0; $week<=sizeof($daysTotal)/7; $week++){
+      $days = array_slice($daysTotal, $week*7, 7);      
+      $renderedTable = "<table class='cal-table'>";
+      $renderedTable .= $this->renderHead($days, $month, $year);
+      foreach ($departments as $department) {
+        $renderedTable .= "<tr class='cal-row'>";
+        $renderedTable .= "<td>$department</td>";
+        foreach ($days as $day) {
+          $dayApps = $this->getAppointmentsAtDate($renderAppointments, $department, $day, $month, $year);
+          
+          if (count($dayApps) > 0) {
+            $id = $dayApps[0]['Id'];
+            $letter = (($dayApps[0]['IsEvent']) ? 'E' : 'D');
+            $tooltip = $this->getToolTipText($dayApps);
+            $renderedTable .= "
             <td class='cal-highlightcell'>
             <div class='tooltip'>
             <a href=/training/$id>$letter</a>
             <span class='tooltiptext'>$tooltip</span>
-          </div>
-          ";
-        } else
+            </div>
+            ";
+          } else
           $renderedTable .= "<td>";
-        $renderedTable .= "</td>";
+          $renderedTable .= "</td>";
+        }
+        $renderedTable .= "</tr>";
       }
-      $renderedTable .= "</tr>";
+      $renderedTable .= "</table>";
+      $renderedCalendar .= $renderedTable;
     }
-    $renderedTable .= "</table>";
-    return $renderedTable;
+    $renderedCalendar .= "</div>";
+    return $renderedCalendar;
   }
-
+  
   function getToolTipText($dayApps)
   {
     $foo = "";
     foreach ($dayApps as $dayApp) {
-
+      
       $foo .= "-------<br>" . date("H:i", strtotime($dayApp["Start"])) . ": " . $dayApp["Thema"] . "<br>";
     }
     $foo .= "-------";
     return $foo;
   }
-
+  
   function getCurrentMonthAppointments($appointments, $year, $month)
   {
     $targetMonth = "$year:$month";
@@ -67,21 +73,21 @@ class CalMaker
     foreach ($appointments as $app) {
       $compareString = date("Y:m", strtotime($app["Start"]));
       if ($compareString == $targetMonth)
-        $filtered[] = $app;
+      $filtered[] = $app;
     }
     return $filtered;
   }
-
+  
   function getFireDepartmentStrings($appointments)
   {
     $departments = array();
     foreach ($appointments as $app) {
       if (!in_array($app["Feuerwehr"], $departments, true))
-        $departments[] = $app["Feuerwehr"];
+      $departments[] = $app["Feuerwehr"];
     }
     return $departments;
   }
-
+  
   function getDaysOfMonthString($year, $month)
   {
     $days = date('t', mktime(0, 0, 0, $month, 1, $year));
@@ -91,7 +97,7 @@ class CalMaker
     }
     return $dayArray;
   }
-
+  
   function getAppointmentsAtDate($appointments, $department, $day, $month, $year)
   {
     $appsAtDay = array();
@@ -100,12 +106,12 @@ class CalMaker
       if ($app["Feuerwehr"] == $department) {
         $dayString = date("Y:m:d", strtotime($app["Start"]));
         if ($dayString == $targetDay)
-          $appsAtDay[] = $app;
+        $appsAtDay[] = $app;
       }
     }
     return $appsAtDay;
   }
-
+  
   function renderHead($days, $month, $year)
   {
     $renderedHead = "<tr class='cal-headrow'>";
@@ -119,7 +125,7 @@ class CalMaker
     $renderedHead .= "</tr>";
     return $renderedHead;
   }
-
+  
   function getShortWeekDayName($dayOfWeek)
   {
     $days = array(
