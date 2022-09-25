@@ -92,11 +92,26 @@ class CalMaker
   {
     $days = date('t', mktime(0, 0, 0, $month, 1, $year));
     $dayArray = array();
+    $diff = $this->getDifferenceToLastMonday($year, $month);
+    for ($i = 0; $i <= $diff; $i++){
+      $dayArray[] = "00";
+    }
     for ($i = 1; $i <= $days; $i++) {
       $dayArray[] = sprintf('%02d', $i);
     }
+    
     return $dayArray;
   }
+  
+  function getDifferenceToLastMonday($year, $month)
+  {
+    for($d=1; $d<=8; $d++){
+      $time = mktime(0, 0, 0, $month, (int)$d, $year);
+      $dayOfWeek = date("N", $time);
+      if($dayOfWeek == 1)return abs(7-$d);
+    }
+  }
+  
   
   function getAppointmentsAtDate($appointments, $department, $day, $month, $year)
   {
@@ -117,6 +132,10 @@ class CalMaker
     $renderedHead = "<tr class='cal-headrow'>";
     $renderedHead .= "<td class='cal-headcell'>" . date('F', mktime(0, 0, 0, $month)) . " $year" . "</td>";
     foreach ($days as $day) {
+      if($day=="00"){
+        $renderedHead .= "<td class='cal-headcell'>xx<br>00</td>";
+        continue;  
+      }
       $time = mktime(0, 0, 0, $month, (int)$day, $year);
       $dayOfWeek = date("N", $time);
       $isToday = date("Y-m-d", $time) == date("Y-m-d", time());
@@ -139,4 +158,5 @@ class CalMaker
     );
     return $days[$dayOfWeek];
   }
+  
 }
