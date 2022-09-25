@@ -282,6 +282,10 @@ label {
 	border-top: 1px solid white;
 }
 
+.cal-row td{
+	border: 1px dotted white;
+}
+
 .cal-highlightcell {
 	background-color: #3da180;
 
