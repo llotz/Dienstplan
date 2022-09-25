@@ -51,6 +51,23 @@ input[type='button']:hover {
 	color: #525252;
 }
 
+.button-red {
+	background-color: rgb(196, 74, 74);
+	color: #dadada;
+	border-style: none;
+	padding: 5px 10px;
+}
+
+.button-red:hover {
+	background-color: #dadada;
+	color: #525252;
+	cursor: pointer;
+}
+
+.main-filter {
+	display:flex;
+}
+
 p {
 	margin: 2px 0px;
 }
@@ -258,6 +275,7 @@ label {
 	border-collapse: collapse;
 	margin-bottom: 10px;
 	margin: 10px;
+	max-width: 90%;
 }
 
 .cal-row {
