@@ -263,6 +263,7 @@ label {
 
 .cal-headcell {
 	padding: 2px;
+	min-width: 1.5em;
 }
 
 .cal-headcell-today {

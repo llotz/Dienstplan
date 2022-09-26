@@ -132,7 +132,7 @@ class CalMaker
     $renderedHead .= "<td class='cal-headcell'>" . date('F', mktime(0, 0, 0, $month)) . " $year" . "</td>";
     foreach ($days as $day) {
       if($day=="00"){
-        $renderedHead .= "<td class='cal-headcell'>xx<br>00</td>";
+        $renderedHead .= "<td class='cal-headcell'><br></td>";
         continue;  
       }
       $time = mktime(0, 0, 0, $month, (int)$day, $year);
