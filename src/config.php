@@ -17,7 +17,7 @@ $website_viewmodels = "viewmodels";
 $website_buissneslogic = "biz";
 $website_css = "includes/css/style.css";
 
-// Login Stuff
+// Login Security
 $login_time_between_logins = 2;
 $login_max_attempts_before_timeout = 5;
 $login_failed_attempts_timeout = 30;

@@ -1,1 +1,1 @@
-<div class="header"><a href="/"><?=$website_title?></a></div> 
+<div class="header"><a href="/">🔥 <?= $website_title ?></a></div>
